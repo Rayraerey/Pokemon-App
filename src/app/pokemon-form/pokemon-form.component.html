@@ -1,0 +1,9 @@
+<h2>Add Favorite Pokemon</h2>
+<form  [formGroup] = "pokemonForm" (ngSubmit) = "onSubmit()" >
+    <input formControlName = "name" placeholder="Name">
+    <input formControlName = "type" placeholder="Type">
+    <input formControlName = "level" placeholder="Level" type="number">
+    <input formControlName = "nature" placeholder="Nature">
+
+    <button type="submit"[disabled]="!pokemonForm.valid">Save to Database</button>
+</form>
