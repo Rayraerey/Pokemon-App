@@ -6,7 +6,7 @@ import { Injectable,inject,signal } from '@angular/core';
 })
 export class PokemonService {
   private http=inject(HttpClient);
-  private apiUrl = 'https://localhost:3000/api/pokemon';
+  private apiUrl = 'http://localhost:3000/api/pokemon';
   //reactive state
   pokemonList = signal<any[]>([]);
 

@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --pokered:       #E3350D;
+  --pokered-dark:  #B02A0A;
+  --pokeyellow:    #FFCB05;
+  --pokeyellow-dk: #C5A100;
+  --pokeblue:      #3B4CCA;
+  --pokeblue-lt:   #6277E0;
+  --pokeblack:     #1A1A2E;
+  --pokegray:      #F5F5F5;
+  --pokegray-md:   #DDDDDD;
+  --pokegray-dk:   #888899;
+  --white:         #FFFFFF;
+  --font-pixel:    'Press Start 2P', monospace;
+  --font-body:     'Nunito', sans-serif;
+}
+
+/* ── Host ── */
+:host {
+  display: block;
+  font-family: var(--font-body);
+  max-width: 780px;
+  margin: 48px auto;
+  padding: 0 20px 60px;
+}
+
+/* ── Page Heading ── */
+h2 {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+  color: var(--white);
+  background: var(--pokered);
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: 12px 12px 0 0;
+  letter-spacing: 0.04em;
+  position: relative;
+  box-shadow: 0 4px 0 var(--pokered-dark);
+  margin-bottom: 0;
+
+  /* little Pokéball circle decoration */
+}
+
+h2::before {
+  content: '⬤';
+  font-size: 0.7em;
+  color: rgba(255,255,255,0.35);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* ── Form Panel ── */
+form {
+  background: var(--white);
+  border: 3px solid var(--pokeblack);
+  border-radius: 0 16px 16px 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 4px 6px 0 var(--pokeblack);
+  margin-bottom: 36px;
+}
+
+/* ── Inputs ── */
+form input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--pokeblack);
+  background: var(--pokegray);
+  border: 2px solid var(--pokegray-md);
+  border-radius: 8px;
+  padding: 10px 14px;
+  flex: 1 1 140px;
+  min-width: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+form input::placeholder {
+  color: var(--pokegray-dk);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+form input:focus {
+  border-color: var(--pokeblue);
+  background: #ECEEFF;
+  box-shadow: 0 0 0 3px rgba(59,76,202,0.18);
+}
+
+form input[type="number"] {
+  max-width: 90px;
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+/* ── Submit Button ── */
+form button[type="submit"] {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  background: var(--pokeyellow);
+  color: var(--pokeblack);
+  border: 2px solid var(--pokeblack);
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--pokeblack);
+  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+form button[type="submit"]:hover:not(:disabled) {
+  background: var(--pokeyellow-dk);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--pokeblack);
+}
+
+form button[type="submit"]:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--pokeblack);
+}
+
+form button[type="submit"]:disabled {
+  background: var(--pokegray-md);
+  color: var(--pokegray-dk);
+  cursor: not-allowed;
+  box-shadow: 3px 3px 0 var(--pokegray-dk);
+  border-color: var(--pokegray-dk);
+}
+
+/* ── Pokemon List Section ── */
+.card {
+  background: var(--white);
+  border: 2.5px solid var(--pokeblack);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 14px;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--pokeblack);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  animation: cardIn 0.35s ease both;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--pokeblack);
+}
+
+/* Coloured left stripe — cycles through Pokémon type colours */
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 5px;
+  border-radius: 0 4px 4px 0;
+  background: var(--pokeblue);
+}
+
+.card:nth-child(2n)::before  { background: var(--pokered);    }
+.card:nth-child(3n)::before  { background: var(--pokeyellow-dk); }
+.card:nth-child(4n)::before  { background: #3DAA5C; }  /* grass green */
+.card:nth-child(5n)::before  { background: #FF7327; }  /* fire orange */
+
+/* Pokéball icon top-right */
+.card::after {
+  content: '◎';
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 1.3rem;
+  color: var(--pokegray-md);
+  pointer-events: none;
+}
+
+.card h3 {
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  color: var(--pokeblack);
+  line-height: 1.5;
+}
+
+.card p {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--pokegray-dk);
+  letter-spacing: 0.02em;
+}
+
+.card p span {
+  display: inline-block;
+  background: var(--pokegray);
+  border: 1.5px solid var(--pokegray-md);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  margin-right: 4px;
+}
+
+/* ── Empty state ── */
+p {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--pokegray-dk);
+  text-align: center;
+  padding: 40px 0;
+  letter-spacing: 0.05em;
+}
+
+/* ── Animations ── */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  form {
+    flex-direction: column;
+  }
+
+  form input,
+  form input[type="number"] {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
+    text-align: left;
+  }
+
+  form button[type="submit"] {
+    width: 100%;
+    text-align: center;
+  }
+}

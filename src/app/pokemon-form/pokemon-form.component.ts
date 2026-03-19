@@ -23,6 +23,7 @@ export class PokemonFormComponent {
       this.pokemonService.savePokemon(this.pokemonForm.getRawValue()).subscribe(() => {
         this.pokemonService.fetchPokemon();
         this.pokemonForm.reset();
+        console.log("Pokemon saved sucessfully!");
       })
     }
   }
